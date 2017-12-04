@@ -1,0 +1,10 @@
+/run/initialize
+/gun/particle e-
+/gun/energy 150 keV
+/gun/direction 1 0 0
+/gun/position -2 0 0 cm
+#/vis/viewer/zoom 10
+/process/inactivate OpBoundary
+/process/activate Scintillation
+/process/optical/scintillation/setYieldFactor 1
+/run/beamOn 1

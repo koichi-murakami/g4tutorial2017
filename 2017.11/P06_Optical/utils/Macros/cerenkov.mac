@@ -1,0 +1,11 @@
+/run/initialize
+/gun/particle e-
+/gun/energy 500 keV
+/gun/direction 1 0 0
+/gun/position -2 0 0 cm
+#/vis/viewer/zoom 5
+/process/activate Cerenkov
+/process/optical/scintillation/setYieldFactor 0
+/process/activate OpBoundary
+
+/run/beamOn 1

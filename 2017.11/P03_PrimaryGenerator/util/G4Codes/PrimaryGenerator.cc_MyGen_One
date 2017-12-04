@@ -1,0 +1,47 @@
+//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+// PrimaryGenerator.cc
+//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+#include "PrimaryGenerator.hh"
+#include "G4Event.hh"
+#include "G4PrimaryVertex.hh"
+#include "G4PrimaryParticle.hh"
+#include "G4ParticleTable.hh"
+#include "G4SystemOfUnits.hh"
+
+//------------------------------------------------------------------------------
+  PrimaryGenerator::PrimaryGenerator()
+//------------------------------------------------------------------------------
+{}
+
+//------------------------------------------------------------------------------
+  PrimaryGenerator::~PrimaryGenerator()
+//------------------------------------------------------------------------------
+{}
+
+//------------------------------------------------------------------------------
+  void PrimaryGenerator::GeneratePrimaries(G4Event* anEvent)
+//------------------------------------------------------------------------------
+{
+// Particle table
+   G4ParticleTable* particleTable = G4ParticleTable::GetParticleTable();
+
+// Setup for primary particle
+   G4String particleName = "proton";
+   G4double momentum = 300.0*MeV;
+   G4ThreeVector momentumVector = G4ThreeVector(0.0, 0.0, 1.0)*momentum;
+
+// Create a primary particle - need to create for every event
+   G4PrimaryParticle* primaryParticle = 
+     new G4PrimaryParticle( particleTable->FindParticle(particleName), 
+                            momentumVector.x(), momentumVector.y(), momentumVector.z() );
+
+// Create a primary vertex - need to create for every event
+   G4ThreeVector vertex = G4ThreeVector( 0.0*cm, 0.0*cm, -1.0*cm);
+   G4PrimaryVertex* primaryVertex = new G4PrimaryVertex(vertex, 0.0*second);
+
+// Add the primary particles to the primary vertex
+   primaryVertex->SetPrimary( primaryParticle );
+
+// Add the vertex to the event
+   anEvent->AddPrimaryVertex( primaryVertex );
+}

@@ -1,0 +1,72 @@
+//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+// PrimaryGenerator.cc
+//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+#include "PrimaryGenerator.hh"
+#include "G4Event.hh"
+#include "G4PrimaryVertex.hh"
+#include "G4PrimaryParticle.hh"
+#include "G4ParticleTable.hh"
+#include "G4SystemOfUnits.hh"
+#include "Randomize.hh"
+
+//------------------------------------------------------------------------------
+  PrimaryGenerator::PrimaryGenerator()
+//------------------------------------------------------------------------------
+{
+// Particle table
+   G4ParticleTable* particleTable = G4ParticleTable::GetParticleTable();
+
+// 1st primary particle - setup for fixed parameters 
+   { 
+     G4String particleName = "e-";
+     G4double momentum = 50.0*MeV;
+     G4double angle = 1.0*deg;
+     G4ThreeVector momentumDirection = G4ThreeVector(0.0, 0.0, 1.0).rotateY(angle);
+     fMomVect_1 = momentumDirection*momentum;
+     fParDef_1  = particleTable->FindParticle(particleName);
+   }
+
+// 2ne primary particle - setup for fixed parameters 
+   { 
+     G4String particleName = "e+";
+     G4double momentum = 50.0*MeV;
+     G4double angle = -1.0*deg;
+     G4ThreeVector momentumDirection = G4ThreeVector(0.0, 0.0, 1.0).rotateY(angle);
+     fMomVect_2 = momentumDirection*momentum;
+     fParDef_2  = particleTable->FindParticle(particleName);
+   }
+}
+
+//------------------------------------------------------------------------------
+  PrimaryGenerator::~PrimaryGenerator()
+//------------------------------------------------------------------------------
+{}
+
+//------------------------------------------------------------------------------
+  void PrimaryGenerator::GeneratePrimaries(G4Event* anEvent)
+//------------------------------------------------------------------------------
+{
+
+// Create primary particles - need to create for every event
+   G4PrimaryParticle* primaryParticle_1 = 
+     new G4PrimaryParticle( fParDef_1, fMomVect_1.x(), fMomVect_1.y(), fMomVect_1.z() );
+   G4PrimaryParticle* primaryParticle_2 = 
+     new G4PrimaryParticle( fParDef_2, fMomVect_2.x(), fMomVect_2.y(), fMomVect_2.z() );
+
+// Primary vertex  position - randomization 
+   G4double pos_X = 2.0*mm*(G4UniformRand()-0.5);
+   G4double pos_Y = 2.0*mm*(G4UniformRand()-0.5);
+   G4double pos_Z = -2.0*cm;
+   G4ThreeVector vertex = G4ThreeVector(pos_X, pos_Y, pos_Z);
+   G4double time_Zero = 0.0*ns;
+
+// Create a primary vertex - need to create for every event
+   G4PrimaryVertex* primaryVertex = new G4PrimaryVertex(vertex, time_Zero);
+
+// Add the primary particles to the primary vertex
+   primaryVertex->SetPrimary( primaryParticle_1 );
+   primaryVertex->SetPrimary( primaryParticle_2 );
+
+// Add primary vertext to the event
+   anEvent->AddPrimaryVertex( primaryVertex );
+}

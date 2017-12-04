@@ -1,0 +1,8 @@
+/gun/particle opticalphoton
+/gun/position -2 0 0 cm
+/gun/energy 4 eV
+/Optical/polarization 90 degree
+/gun/direction 1  2.52 0
+/process/activate OpBoundary
+#/vis/viewer/zoom 20
+/run/beamOn 100

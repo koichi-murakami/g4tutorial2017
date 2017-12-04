@@ -1,0 +1,11 @@
+/gun/particle mu-
+/gun/energy 1 GeV
+/gun/position 10. 0. -5. cm
+/gun/direction -10. 0. 5.
+
+# Activate H1 ID=2 sum_eDep
+/analysis/h1/set 2 100 0. 2 MeV
+
+/tracking/verbose 0
+/run/beamOn 50
+

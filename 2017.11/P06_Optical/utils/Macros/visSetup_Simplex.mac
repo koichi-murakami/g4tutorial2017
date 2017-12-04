@@ -1,0 +1,28 @@
+#------------------------------------------------------------------------------------
+# visSetup_Simplex.mac: Set up the visualization environment - simple version
+#  [Note] Geant4 Tutorial for Hep/Space Users: 2015.08.24 @Hiroshima 
+#------------------------------------------------------------------------------------
+
+## Specify the viewer 
+/vis/open OGL                                 # Use OpenGL
+
+## Specify objects to draw
+/vis/drawVolume world    
+#/vis/drawVolume                    # Volumes
+/vis/scene/add/trajectories smooth            # Particle trajectories
+
+## Add decorations
+#/vis/scene/add/axes                           # Axes (x=red, y=green, z=blue)
+
+## To get simple view
+/vis/viewer/set/style wireframe                # Volume style (surface/wireframe)
+#/vis/viewer/set/hiddenEdge true               # Show edges of surfaces
+/vis/viewer/set/auxiliaryEdge true            # Show edges of curved surfaces
+/vis/viewer/set/lineSegmentsPerCircle 100     # Make circles smoothed 
+/vis/viewer/set/viewpointThetaPhi 120 150     # Nice camera angle
+
+# To superimpose all of the events from a given run:
+/vis/scene/endOfEventAction accumulate
+#
+# Re-establish auto refreshing and verbosity:
+/vis/viewer/set/autoRefresh true

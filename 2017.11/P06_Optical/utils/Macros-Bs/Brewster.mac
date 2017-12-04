@@ -1,0 +1,9 @@
+/gun/particle opticalphoton
+/gun/position -10. -390. 0. cm
+/gun/energy 4. eV
+/Optical/polarization 0 degree
+#/Optical/polarization 0. degree
+/vis/disable
+/control/loop dir.mac  y 0. 5.0  0.05
+
+

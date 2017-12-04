@@ -1,0 +1,30 @@
+# Example of cylinder mesh
+# define scoring mesh
+/score/create/cylinderMesh cylMesh_1
+/score/mesh/cylinderSize 50. 100. mm
+/score/mesh/translate/xyz 0 0 0. mm
+# R Z Phi division
+/score/mesh/nBin 1 100 1
+#
+#/score/quantity/doseDeposit dDep
+/score/quantity/energyDeposit eDep
+#
+/score/close
+/score/list
+#
+/control/verbose 2
+/tracking/verbose 0
+# define gun and start a run
+/gps/particle e-
+/gps/energy 10 GeV
+/gps/position 0 0 -20 cm
+/gps/direction 0 0 1
+/vis/disable
+/run/beamOn 100
+/vis/enable
+#
+
+# Dump scores to a file
+
+/score/dumpQuantityToFile cylMesh_1 eDep eDep.csv
+#

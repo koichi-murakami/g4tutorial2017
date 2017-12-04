@@ -1,0 +1,31 @@
+//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+// PrimaryGenerator.hh
+//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+#ifndef PrimaryGenerator_h
+#define PrimaryGenerator_h 1
+
+#include "G4VUserPrimaryGeneratorAction.hh"
+#include "G4ThreeVector.hh"
+class G4Event;
+class G4ParticleDefinition;
+
+//------------------------------------------------------------------------------
+  class PrimaryGenerator : public G4VUserPrimaryGeneratorAction
+//------------------------------------------------------------------------------
+{
+  public:
+    PrimaryGenerator();    
+   ~PrimaryGenerator();
+
+  public:
+    void GeneratePrimaries(G4Event*);
+
+  private:
+    G4ParticleDefinition* fParDef_1;         // Partilce definition: particle #1
+    G4ThreeVector fMomVect_1;                // Momentum vector: particle #1  
+    G4ParticleDefinition* fParDef_2;         // Partilce definition: particle #2
+    G4ThreeVector fMomVect_2;                // Momentum vector: particle #2  
+};
+#endif
+
+

@@ -1,9 +1,7 @@
 # Geant4 Tutorial Examples
 Geant4 tutorial example codes
 
-* 2017.11
-
-
+2017.11
 
 ## License
 BSD 2-Clause License

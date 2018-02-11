@@ -1,8 +1,8 @@
-# Geant4 Tutorial Examples
-Geant4 tutorial example codes
+# Geant4 Examples for Tutorials
 
-* 2017.11
+Geant4 example code for tutorials
 
+* 2017.11 (v10.3.p02)
 
 ## License
 BSD 2-Clause License

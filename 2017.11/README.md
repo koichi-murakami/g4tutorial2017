@@ -1,10 +1,9 @@
 # Geant4 Examples for Tutorials
 
+[![g4tut](https://img.shields.io/badge/g4tut-2017.11-orange.svg)](https://wiki.kek.jp/display/geant4)
+[![geant4](https://img.shields.io/badge/geant4-10.3.p02-blue.svg)](http://www.geant4.org/)
+
 Geant4 example code for tutorials
-
-2017.11
-
-Geant4 : 10.3.p02
 
 ## Contents
 
